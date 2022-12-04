@@ -32,9 +32,4 @@ public class Player : MonoBehaviour
         GameManager.UpdateGameState(GameManager.gameState == GameState.Playing ? GameState.Pause : GameState.Playing);
         Debug.Log("Pause");
     }
-
-    public void Test()
-    {
-        Debug.Log("pressed");
-    }
 }

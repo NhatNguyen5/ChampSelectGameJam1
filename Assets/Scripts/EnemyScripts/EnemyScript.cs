@@ -6,6 +6,8 @@ using UnityEngine.AI;
 
 public class EnemyScript : MonoBehaviour
 {
+    
+
     private NavMeshAgent agent;
     [SerializeField] private Transform target;
     [SerializeField] private Animator animator;
@@ -38,7 +40,7 @@ public class EnemyScript : MonoBehaviour
             if(attacking == null)
             {
                 EnemyMovement();
-                Debug.Log("moving");
+                //Debug.Log("moving");
             }
         }
         AnimationHandler(animationState);

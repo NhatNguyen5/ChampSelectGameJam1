@@ -21,6 +21,11 @@ namespace StarterAssets
 		public bool cursorInputForLook = true;
 
 		public bool isPaused = false;
+		private Player player;
+		private void Awake()
+		{
+			player = GetComponent<Player>();
+		}
 
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
 		public void OnMove(InputValue value)
@@ -30,7 +35,7 @@ namespace StarterAssets
 
 		public void OnLook(InputValue value)
 		{
-			if(!isPaused)
+			if(!isPaused || !player.aiming)
 				LookInput(value.Get<Vector2>());
 		}
 

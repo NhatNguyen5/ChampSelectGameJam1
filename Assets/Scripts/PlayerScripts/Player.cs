@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using StarterAssets;
-using UnityEditor.PackageManager;
 using UnityEngine.InputSystem;
 using Cinemachine;
 
@@ -35,41 +34,43 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        Vector3 mouseWorldPos = Vector3.zero;
-        aimVirCam.transform.gameObject.SetActive(aiming);
-        crossHair.SetActive(aiming);
-        if (aiming)
+        if (!SAInputs.isPaused)
         {
-            Debug.Log("Aiming");
-            Vector2 rayOrigin = new Vector2(Screen.width / 2f, Screen.height / 2f); // center of the screen
-
-            // actual Ray
-            Ray ray = Camera.main.ScreenPointToRay(rayOrigin);
-
-            RaycastHit hit;
-            if (Physics.Raycast(ray, out hit, 999f, ~IgnoreLayer))
+            Vector3 mouseWorldPos = Vector3.zero;
+            aimVirCam.transform.gameObject.SetActive(aiming);
+            crossHair.SetActive(aiming);
+            if (aiming)
             {
-                Debug.Log("Hit " + hit.transform.gameObject.name);
-                AimTarget.transform.position = Vector3.Lerp(AimTarget.transform.position, hit.point, Time.deltaTime * 200f);
-                mouseWorldPos = hit.point;
+                Debug.Log("Aiming");
+                Vector2 rayOrigin = new Vector2(Screen.width / 2f, Screen.height / 2f); // center of the screen
+
+                // actual Ray
+                Ray ray = Camera.main.ScreenPointToRay(rayOrigin);
+
+                RaycastHit hit;
+                if (Physics.Raycast(ray, out hit, 999f, ~IgnoreLayer))
+                {
+                    Debug.Log("Hit " + hit.transform.gameObject.name);
+                    AimTarget.transform.position = Vector3.Lerp(AimTarget.transform.position, hit.point, Time.deltaTime * 200f);
+                    mouseWorldPos = hit.point;
+                }
+                else
+                {
+                    Vector3 tempFocusTarget = Camera.main.transform.position + Camera.main.transform.forward * 200f;
+                    AimTarget.transform.position = Vector3.Lerp(AimTarget.transform.position, tempFocusTarget, Time.deltaTime * 200f);
+                    mouseWorldPos = tempFocusTarget;
+                }
+                Vector3 worldAimTarget = mouseWorldPos;
+                worldAimTarget.y = transform.position.y;
+                Vector3 aimDir = (worldAimTarget - transform.position).normalized;
+
+                transform.forward = Vector3.Lerp(transform.forward, aimDir, Time.deltaTime * 20f);
             }
             else
             {
-                Vector3 tempFocusTarget = Camera.main.transform.position + Camera.main.transform.forward * 200f;
-                AimTarget.transform.position = Vector3.Lerp(AimTarget.transform.position, tempFocusTarget, Time.deltaTime * 200f);
-                mouseWorldPos = tempFocusTarget;
+                AimTarget.localPosition = defaultATPos;
             }
-            Vector3 worldAimTarget = mouseWorldPos;
-            worldAimTarget.y = transform.position.y;
-            Vector3 aimDir = (worldAimTarget - transform.position).normalized;
-
-            transform.forward = Vector3.Lerp(transform.forward, aimDir, Time.deltaTime * 20f);
         }
-        else
-        {
-            AimTarget.localPosition = defaultATPos;
-        }
-
     }
 
     public void OnPause()

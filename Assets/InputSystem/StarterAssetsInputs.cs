@@ -35,8 +35,10 @@ namespace StarterAssets
 
 		public void OnLook(InputValue value)
 		{
-			if(!isPaused || !player.aiming)
-				LookInput(value.Get<Vector2>());
+			if (isPaused)
+				return;
+			//if (!player.aiming)
+			LookInput(value.Get<Vector2>());
 		}
 
 		public void OnJump(InputValue value)

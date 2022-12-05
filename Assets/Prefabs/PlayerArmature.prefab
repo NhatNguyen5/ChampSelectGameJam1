@@ -1438,6 +1438,7 @@ GameObject:
   - component: {fileID: 5885216827943657505}
   - component: {fileID: 135756642000475821}
   - component: {fileID: 4416926081852918493}
+  - component: {fileID: 842025824906801259}
   - component: {fileID: 5966193165192053898}
   - component: {fileID: 1093644388120928215}
   - component: {fileID: 1797584733519895869}
@@ -1685,6 +1686,20 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &842025824906801259
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4416926081852918481}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c48d2edd9cae43ec931f3d882490539, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 5
+  timeBeforeNextHit: 1
 --- !u!114 &5966193165192053898
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1698,6 +1713,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AimTarget: {fileID: 5184797750609779230}
+  aimVirCam: {fileID: 0}
+  IgnoreLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  crossHair: {fileID: 0}
 --- !u!114 &1093644388120928215
 MonoBehaviour:
   m_ObjectHideFlags: 0

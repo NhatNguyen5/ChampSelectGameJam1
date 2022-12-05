@@ -6,6 +6,7 @@ TagManager:
   tags:
   - CinemachineTarget
   - Candice Agent
+  - Enemy
   layers:
   - Default
   - TransparentFX

@@ -14,6 +14,8 @@ public class EnemyScript : MonoBehaviour
     [SerializeField] private Rigidbody rb;
     [SerializeField] private PlayerDetection playerDetection;
     [SerializeField] private InMeleeRangeDetection inMeleeRangeDetection;
+    [SerializeField] private SphereCollider RightHandCol;
+    [SerializeField] private SphereCollider LeftHandCol;
     private Coroutine waiting = null;
     private Coroutine attacking = null;
     private void Awake()
@@ -34,6 +36,13 @@ public class EnemyScript : MonoBehaviour
         {
             animationState = "Attacking";
             agent.destination = transform.position; //stop the enemy
+            waitFor(0.5f, () =>
+            {
+                if (!RightHandCol.enabled)
+                    RightHandCol.enabled = true;
+                if (!LeftHandCol.enabled)
+                    LeftHandCol.enabled = true;
+            });
         }
         else
         {
@@ -41,6 +50,11 @@ public class EnemyScript : MonoBehaviour
             {
                 EnemyMovement();
                 //Debug.Log("moving");
+
+                if (RightHandCol.enabled)
+                    RightHandCol.enabled = false;
+                if (LeftHandCol.enabled)
+                    LeftHandCol.enabled = false;
             }
         }
         AnimationHandler(animationState);
@@ -85,9 +99,9 @@ public class EnemyScript : MonoBehaviour
 
     private IEnumerator attackAnimation()
     {
-        animator.SetBool("Attack1", true);
+        animator.SetBool("Attack2", true);
         yield return new WaitForSeconds(1.7f);
-        animator.SetBool("Attack1", false);
+        animator.SetBool("Attack2", false);
         attacking = null;
     }
 

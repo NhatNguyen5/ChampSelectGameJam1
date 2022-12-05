@@ -8,6 +8,7 @@ using Cinemachine;
 public class Player : MonoBehaviour
 {
     private StarterAssetsInputs SAInputs;
+    private ThirdPersonController TPController;
     public Transform AimTarget;
     [SerializeField] private CinemachineVirtualCamera aimVirCam;
     [SerializeField] private LayerMask IgnoreLayer;
@@ -19,6 +20,7 @@ public class Player : MonoBehaviour
     void Start()
     {
         SAInputs = GetComponent<StarterAssetsInputs>();
+        TPController = GetComponent<ThirdPersonController>();
         Debug.Log(AimTarget.position);
         defaultATPos = AimTarget.localPosition;
         GameManager.SAInputs = SAInputs;
@@ -63,13 +65,15 @@ public class Player : MonoBehaviour
                 Vector3 worldAimTarget = mouseWorldPos;
                 worldAimTarget.y = transform.position.y;
                 Vector3 aimDir = (worldAimTarget - transform.position).normalized;
-
+                TPController.setRotateOnMove(false);
                 transform.forward = Vector3.Lerp(transform.forward, aimDir, Time.deltaTime * 20f);
             }
             else
             {
+                TPController.setRotateOnMove(true);
                 AimTarget.localPosition = defaultATPos;
             }
+
         }
     }
 
@@ -88,5 +92,10 @@ public class Player : MonoBehaviour
     public void AimInput(bool newAimState)
     {
         aiming = newAimState;
+    }
+
+    public void OnFire()
+    {
+
     }
 }

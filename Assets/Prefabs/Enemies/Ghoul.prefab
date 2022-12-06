@@ -5260,6 +5260,7 @@ MonoBehaviour:
   AteCookie: 0
   cookieEffectDuration: 10
   enemyScript: {fileID: 8700452158299933320}
+  EatSound: {fileID: 8300000, guid: 344cf7a595b512b4c911478f22e45a73, type: 3}
 --- !u!1 &8733197082941124404
 GameObject:
   m_ObjectHideFlags: 0
@@ -6491,7 +6492,8 @@ MonoBehaviour:
   enemyHit: {fileID: 159775031616317122}
   RightHandCol: {fileID: 853680985312400477}
   LeftHandCol: {fileID: 9087940222435740791}
-  particleSystem: {fileID: 0}
+  particleSystem: {fileID: 7047381869359489635}
+  AttackSound: {fileID: 8300000, guid: 2c1a648aed077aa48a16e895d8f4cb63, type: 3}
   countdown: 0
 --- !u!195 &8700452158299933321
 NavMeshAgent:

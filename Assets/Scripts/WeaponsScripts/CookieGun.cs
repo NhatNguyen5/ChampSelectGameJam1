@@ -15,6 +15,7 @@ public class CookieGun : MonoBehaviour
     private GameObject mostRecentCookie = null;
     private Vector3 pointA = Vector3.zero;
     private Vector3 pointB = Vector3.zero;
+    public AudioClip ShootSound;
 
     private void Update()
     {
@@ -31,6 +32,7 @@ public class CookieGun : MonoBehaviour
     {
         //pointA = target;
         //pointB = firePoint.position;
+        AudioSource.PlayClipAtPoint(ShootSound, transform.position, 1);
         Vector3 aimDir = (target - firePoint.position).normalized;
         GameObject thisCookie = Instantiate(cookiePrefab, firePoint.position, Quaternion.LookRotation(aimDir, Vector3.up));
         mostRecentCookie = thisCookie;

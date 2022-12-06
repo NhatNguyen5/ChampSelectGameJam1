@@ -105,7 +105,7 @@ public class EnemyScript : MonoBehaviour
         if (targetInrange)
         {
             agent.destination = target.position; //Follow Player
-            agent.speed = 3.5f;
+            agent.speed = 7f;
         }
         else //Random movement
         {

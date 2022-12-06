@@ -1974,6 +1974,7 @@ MonoBehaviour:
   timeBeforeNextHit: 1
   HpText: {fileID: 0}
   HPSlider: {fileID: 0}
+  EatSound: {fileID: 8300000, guid: 344cf7a595b512b4c911478f22e45a73, type: 3}
 --- !u!114 &5966193165192053898
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4135,6 +4136,7 @@ MonoBehaviour:
   delayBetweenShot: 1
   cookieSpeed: 0
   cookieMaxAge: 0
+  ShootSound: {fileID: 0}
 --- !u!1001 &5476195623386210495
 PrefabInstance:
   m_ObjectHideFlags: 0

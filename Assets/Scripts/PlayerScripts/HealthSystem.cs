@@ -15,6 +15,7 @@ public class HealthSystem : MonoBehaviour
     protected bool invulnerable;
     public TextMeshProUGUI HpText;
     public Slider HPSlider;
+    public AudioClip EatSound;
 
     private void Start()
     {
@@ -43,6 +44,7 @@ public class HealthSystem : MonoBehaviour
         if(currHealth < maxHealth)
             currHealth++;
         updateHealthBar();
+        AudioSource.PlayClipAtPoint(EatSound, transform.position, 1);
         Debug.Log(currHealth);
     }
 

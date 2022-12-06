@@ -8,6 +8,7 @@ public class EnemyHitScript : MonoBehaviour
     public float cookieEffectDuration;
     public EnemyScript enemyScript;
     private Coroutine ateCookieRoutine = null;
+    public AudioClip EatSound;
     // Start is called before the first frame update
     void Start()
     {
@@ -42,6 +43,7 @@ public class EnemyHitScript : MonoBehaviour
     {
         AteCookie = true;
         enemyScript.countdown = duration;
+        AudioSource.PlayClipAtPoint(EatSound, transform.position, 10);
         yield return new WaitForSeconds(duration);
         AteCookie = false;
         ateCookieRoutine = null;

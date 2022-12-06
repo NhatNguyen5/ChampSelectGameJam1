@@ -8,6 +8,7 @@ TagManager:
   - Candice Agent
   - Enemy
   - EnemyHand
+  - Cookie
   layers:
   - Default
   - TransparentFX

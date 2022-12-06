@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.InputSystem.XR;
 
 public class EnemyScript : MonoBehaviour
 {
@@ -16,6 +17,7 @@ public class EnemyScript : MonoBehaviour
     [SerializeField] private SphereCollider RightHandCol;
     [SerializeField] private SphereCollider LeftHandCol;
     [SerializeField] private ParticleSystem particleSystem;
+    public AudioClip AttackSound;
     private Coroutine waiting = null;
     private Coroutine attacking = null;
     private string animationState = "Moving";
@@ -141,6 +143,7 @@ public class EnemyScript : MonoBehaviour
     private IEnumerator attackAnimation()
     {
         animator.SetBool("Attack2", true);
+        AudioSource.PlayClipAtPoint(AttackSound, transform.position, 1);
         yield return new WaitForSeconds(1.7f);
         animator.SetBool("Attack2", false);
         attacking = null;

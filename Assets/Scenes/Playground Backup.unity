@@ -5563,6 +5563,11 @@ PrefabInstance:
       objectReference: {fileID: 2099401151}
     - target: {fileID: 8700452158299933320, guid: 24b54081114d1ed41a57e0305d7695c9,
         type: 3}
+      propertyPath: AttackSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 2c1a648aed077aa48a16e895d8f4cb63, type: 3}
+    - target: {fileID: 8700452158299933320, guid: 24b54081114d1ed41a57e0305d7695c9,
+        type: 3}
       propertyPath: particleSystem
       value: 
       objectReference: {fileID: 782520539}

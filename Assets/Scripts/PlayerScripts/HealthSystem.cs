@@ -26,6 +26,7 @@ public class HealthSystem : MonoBehaviour
     {
         if(currHealth <= 0)
         {
+            GameManager.UpdateGameState(GameState.Pause);
             Destroy(gameObject);
         }
     }

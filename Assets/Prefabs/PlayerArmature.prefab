@@ -1710,6 +1710,7 @@ GameObject:
   - component: {fileID: 5966193165192053898}
   - component: {fileID: 1093644388120928215}
   - component: {fileID: 1797584733519895869}
+  - component: {fileID: 7672340545099305947}
   m_Layer: 8
   m_Name: PlayerArmature
   m_TagString: Player
@@ -1834,8 +1835,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pushLayers:
     serializedVersion: 2
-    m_Bits: 0
-  canPush: 0
+    m_Bits: 2048
+  canPush: 1
   strength: 1.1
 --- !u!114 &135756642000475821
 MonoBehaviour:
@@ -1988,9 +1989,9 @@ MonoBehaviour:
   aimVirCam: {fileID: 0}
   IgnoreLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 4388
   crossHair: {fileID: 0}
-  cookieGun: {fileID: 0}
+  cookieGun: {fileID: 6649301203588367606}
 --- !u!114 &1093644388120928215
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2098,6 +2099,20 @@ MonoBehaviour:
   - {fileID: 4249190120948064996}
   - {fileID: 1321086290467262078}
   - {fileID: 8963279144940889463}
+--- !u!136 &7672340545099305947
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4416926081852918481}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.25
+  m_Height: 1.7
+  m_Direction: 1
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &4502020223889113142
 GameObject:
   m_ObjectHideFlags: 0
@@ -4116,6 +4131,9 @@ MonoBehaviour:
   firePoint: {fileID: 5706541161459211522}
   cookiePrefab: {fileID: 4182930100863026404, guid: 6ebbfa1a60d1ba14f802eacc9101620f,
     type: 3}
+  delayBetweenShot: 1
+  cookieSpeed: 0
+  cookieMaxAge: 0
 --- !u!1001 &5476195623386210495
 PrefabInstance:
   m_ObjectHideFlags: 0

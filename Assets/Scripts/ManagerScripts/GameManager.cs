@@ -11,17 +11,23 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     public static event Action<GameState> onGameStateChanged;
-    public static float soundVolume = 100;
+    public static float soundVolume = 1;
     public static GameState gameState;
     public delegate void GameStateDelegate(GameState state);
     public static StarterAssetsInputs SAInputs;
     private StarterAssetsInputs _SAInputs;
+    public AudioClip[] BGM;
+    public AudioSource BGMSource;
+    public Slider MenuBGMSlider; //This is really bad, I'm sorry
+    public Slider PauseBGMSlider;
 
     private void Start()
     {
         if(SAInputs != null)
             _SAInputs = SAInputs;
         gameState = GameState.MainMenu;
+        MenuBGMSlider.value = BGMSource.volume;
+        PauseBGMSlider.value = BGMSource.volume;
     }
 
     public static void UpdateGameState(GameState newState)
@@ -82,6 +88,25 @@ public class GameManager : MonoBehaviour
     public void QuitGame()
     {
         Application.Quit();
+    }
+
+    public void BGMSliderChange(Slider thisSlider)
+    {
+        BGMSource.volume = thisSlider.value;
+    }
+
+    public void onBGMVolumeChange()
+    {
+        //if(!MenuBGMSlider.enabled)
+            MenuBGMSlider.value = BGMSource.volume;
+        //if(!PauseBGMSlider.enabled)
+            PauseBGMSlider.value = BGMSource.volume;
+    }
+
+    public void BGMSwap(int trackNum)
+    {
+        BGMSource.clip = BGM[trackNum];
+        BGMSource.Play();
     }
 }
 

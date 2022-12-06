@@ -36,7 +36,7 @@ public class PressurePlatform : MonoBehaviour
         {
             player = true;
         }
-        else if(other.tag == "Enemy")
+        else if(other.tag == "EnemyHitBox")
         {
             enemy = true;
         }
@@ -48,7 +48,7 @@ public class PressurePlatform : MonoBehaviour
         {
             player = false;
         }
-        else if (other.tag == "Enemy")
+        else if (other.tag == "EnemyHitBox")
         {
             enemy = false;
         }

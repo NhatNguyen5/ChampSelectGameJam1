@@ -15,7 +15,7 @@ public class PressurePlatform : MonoBehaviour
     private bool needsABody;
     private void Update()
     {
-        if(player || enemy)
+        if(enemy)
         {
             sensor.SetActive(true);
             linkedObjective.SetActive(false);

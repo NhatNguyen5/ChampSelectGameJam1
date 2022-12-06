@@ -2,6 +2,7 @@ using Newtonsoft.Json.Serialization;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem.LowLevel;
 using UnityEngine.UI;
@@ -17,6 +18,7 @@ public class MenuManager : MonoBehaviour
     [Header("Menus")]
     public GameObject MainMenu;
     public GameObject PauseMenu;
+    public TextMeshProUGUI WLtext;
 
     // Start is called before the first frame update
     void Start()
@@ -41,6 +43,17 @@ public class MenuManager : MonoBehaviour
             case GameState.Pause:
                 MainMenu.SetActive(false);
                 PauseMenu.SetActive(true);
+                WLtext.text = "";
+                break;
+            case GameState.Victory:
+                MainMenu.SetActive(false);
+                PauseMenu.SetActive(true);
+                WLtext.text = "YOU WIN!";
+                break;
+            case GameState.Lose:
+                MainMenu.SetActive(false);
+                PauseMenu.SetActive(true);
+                WLtext.text = "YOU DIE!";
                 break;
             default:
                 Debug.LogError("Bad gameState");

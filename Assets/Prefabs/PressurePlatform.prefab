@@ -109,6 +109,7 @@ GameObject:
   - component: {fileID: 8348440393169334249}
   - component: {fileID: 8348440393169334248}
   - component: {fileID: 8348440393169334255}
+  - component: {fileID: 5580991202836508940}
   m_Layer: 0
   m_Name: Sensor
   m_TagString: Untagged
@@ -192,8 +193,23 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1.019324, z: 1}
+  m_Size: {x: 1, y: 2, z: 1}
   m_Center: {x: 0, y: 0.009660235, z: 0}
+--- !u!114 &5580991202836508940
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8348440393169334254}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36d5cbffae4e8ea46ac72fb984201b0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sensor: {fileID: 0}
+  linkedObjective: {fileID: 8348440392461537116}
+  needsABody: 1
 --- !u!1 &8348440393467565543
 GameObject:
   m_ObjectHideFlags: 0

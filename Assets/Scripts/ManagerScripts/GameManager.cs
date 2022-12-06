@@ -44,8 +44,14 @@ public class GameManager : MonoBehaviour
                 Time.timeScale = 1;
                 break;
             case GameState.Victory:
+                toggleCursor(false);
+                Cursor.visible = true;
+                Time.timeScale = 0;
                 break;
             case GameState.Lose:
+                toggleCursor(false);
+                Cursor.visible = true;
+                Time.timeScale = 0;
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(newState), newState, null);

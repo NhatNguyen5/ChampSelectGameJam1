@@ -4,6 +4,7 @@ using UnityEngine;
 using StarterAssets;
 using UnityEngine.InputSystem;
 using Cinemachine;
+using static UnityEngine.Rendering.DebugUI;
 
 public class Player : MonoBehaviour
 {
@@ -13,8 +14,12 @@ public class Player : MonoBehaviour
     [SerializeField] private CinemachineVirtualCamera aimVirCam;
     [SerializeField] private LayerMask IgnoreLayer;
     public GameObject crossHair;
+    public CookieGun cookieGun;
     public bool aiming { get; private set; }
+    public bool firing { get; private set; }
     private Vector3 defaultATPos;
+    private RaycastHit hit;
+    private Vector3 mouseWorldPos = Vector3.zero;
 
     // Start is called before the first frame update
     void Start()
@@ -38,7 +43,6 @@ public class Player : MonoBehaviour
     {
         if (!SAInputs.isPaused)
         {
-            Vector3 mouseWorldPos = Vector3.zero;
             aimVirCam.transform.gameObject.SetActive(aiming);
             crossHair.SetActive(aiming);
             if (aiming)
@@ -49,7 +53,6 @@ public class Player : MonoBehaviour
                 // actual Ray
                 Ray ray = Camera.main.ScreenPointToRay(rayOrigin);
 
-                RaycastHit hit;
                 if (Physics.Raycast(ray, out hit, 999f, ~IgnoreLayer))
                 {
                     Debug.Log("Hit " + hit.transform.gameObject.name);
@@ -74,6 +77,11 @@ public class Player : MonoBehaviour
                 AimTarget.localPosition = defaultATPos;
             }
 
+            if (firing)
+            {
+                cookieGun.shootCookie(hit.point);
+            }
+
         }
     }
 
@@ -94,8 +102,13 @@ public class Player : MonoBehaviour
         aiming = newAimState;
     }
 
-    public void OnFire()
+    public void FireInput(bool newFireState)
     {
+        firing = newFireState;
+    }
 
+    public void OnFire(InputValue value)
+    {
+        FireInput(value.isPressed);
     }
 }

@@ -1969,7 +1969,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c48d2edd9cae43ec931f3d882490539, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 10
+  maxHealth: 10
+  currHealth: 0
   timeBeforeNextHit: 1
   HpText: {fileID: 0}
   HPSlider: {fileID: 0}

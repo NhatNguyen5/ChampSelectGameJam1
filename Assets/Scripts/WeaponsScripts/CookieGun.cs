@@ -12,6 +12,7 @@ public class CookieGun : MonoBehaviour
     public float cookieSpeed;
     public float cookieMaxAge;
     private Coroutine shootCookieCoroutine = null;
+    private GameObject mostRecentCookie = null;
     private Vector3 pointA = Vector3.zero;
     private Vector3 pointB = Vector3.zero;
 
@@ -32,10 +33,13 @@ public class CookieGun : MonoBehaviour
         //pointB = firePoint.position;
         Vector3 aimDir = (target - firePoint.position).normalized;
         GameObject thisCookie = Instantiate(cookiePrefab, firePoint.position, Quaternion.LookRotation(aimDir, Vector3.up));
+        mostRecentCookie = thisCookie;
         Rigidbody thisCookieRb = thisCookie.GetComponent<Rigidbody>();
         thisCookieRb.AddForce(firePoint.forward * cookieSpeed, ForceMode.Impulse);
         Destroy(thisCookie, cookieMaxAge);
         yield return new WaitForSeconds(wait);
         shootCookieCoroutine = null;
     }
+
+    public GameObject getCookie() => mostRecentCookie;
 }

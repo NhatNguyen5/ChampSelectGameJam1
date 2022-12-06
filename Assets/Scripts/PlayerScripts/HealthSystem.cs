@@ -7,8 +7,9 @@ using UnityEngine.UI;
 public class HealthSystem : MonoBehaviour
 {
     [SerializeField]
-    protected int health;
-    private int currHealth;
+    public int maxHealth;
+    [HideInInspector]
+    public int currHealth;
     [SerializeField]
     protected float timeBeforeNextHit;
     protected bool invulnerable;
@@ -17,7 +18,7 @@ public class HealthSystem : MonoBehaviour
 
     private void Start()
     {
-        currHealth = health;
+        currHealth = maxHealth;
         updateHealthBar();
     }
 
@@ -36,6 +37,14 @@ public class HealthSystem : MonoBehaviour
         Debug.Log(currHealth);
     }
 
+    public void heal()
+    {
+        if(currHealth < maxHealth)
+            currHealth++;
+        updateHealthBar();
+        Debug.Log(currHealth);
+    }
+
     protected IEnumerator InvulnerableTimer()
     {
         yield return new WaitForSeconds(timeBeforeNextHit);
@@ -44,8 +53,8 @@ public class HealthSystem : MonoBehaviour
 
     private void updateHealthBar()
     {
-        HpText.text = currHealth.ToString() + "/" + health.ToString();
-        HPSlider.value = (float)currHealth / (float)health;
+        HpText.text = currHealth.ToString() + "/" + maxHealth.ToString();
+        HPSlider.value = (float)currHealth / (float)maxHealth;
     }
 
 }

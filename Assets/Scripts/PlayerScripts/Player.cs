@@ -20,6 +20,7 @@ public class Player : MonoBehaviour
     private Vector3 defaultATPos;
     private RaycastHit hit;
     private Vector3 mouseWorldPos = Vector3.zero;
+    public GameObject mostRecentCookie { get; private set; }
 
     // Start is called before the first frame update
     void Start()
@@ -36,6 +37,7 @@ public class Player : MonoBehaviour
     {
         GameManager.SAInputs = null;
         SAInputs = null;
+        mostRecentCookie = null;
     }
 
     // Update is called once per frame
@@ -80,6 +82,7 @@ public class Player : MonoBehaviour
             if (firing)
             {
                 cookieGun.shootCookie(hit.point);
+                mostRecentCookie = cookieGun.getCookie();
             }
 
         }

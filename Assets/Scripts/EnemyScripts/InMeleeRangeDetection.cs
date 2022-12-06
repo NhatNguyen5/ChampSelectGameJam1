@@ -5,6 +5,8 @@ using UnityEngine;
 public class InMeleeRangeDetection : MonoBehaviour
 {
     public bool playerInRange = false;
+    public bool AteCookie;
+    private string target = "Player";
     // Start is called before the first frame update
     void Start()
     {
@@ -14,12 +16,12 @@ public class InMeleeRangeDetection : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        target = AteCookie ? "Cookie" : "Player";
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag(target))
         {
             playerInRange = true;
         }
@@ -27,7 +29,7 @@ public class InMeleeRangeDetection : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag(target))
         {
             playerInRange = false;
         }

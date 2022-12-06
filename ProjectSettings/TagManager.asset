@@ -9,6 +9,7 @@ TagManager:
   - Enemy
   - EnemyHand
   - Cookie
+  - EnemyHitBox
   layers:
   - Default
   - TransparentFX

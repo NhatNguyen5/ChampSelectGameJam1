@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class CookieProjectile : MonoBehaviour
 {
-    private Rigidbody rb;
-    public float projectileSpeed = 1;
-    public float deSpawnTime = 2;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,5 +14,23 @@ public class CookieProjectile : MonoBehaviour
     void Update()
     {
         
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("EnemyHitBox"))
+        {
+            other.GetComponent<EnemyHitScript>().EatCookie();
+            Destroy(gameObject);
+        }
+        if (other.CompareTag("Player"))
+        {
+            PlayerHealth PHealth = other.GetComponent<PlayerHealth>();
+            if (PHealth.currHealth < PHealth.maxHealth)
+            {
+                PHealth.heal();
+                Destroy(gameObject);
+            }
+        }
     }
 }

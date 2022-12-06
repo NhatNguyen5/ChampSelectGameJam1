@@ -6,32 +6,70 @@ using UnityEngine.AI;
 
 public class EnemyScript : MonoBehaviour
 {
-    
-
     private NavMeshAgent agent;
-    [SerializeField] private Transform target;
+    [SerializeField] private Transform player;
     [SerializeField] private Animator animator;
     [SerializeField] private Rigidbody rb;
     [SerializeField] private PlayerDetection playerDetection;
-    [SerializeField] private InMeleeRangeDetection inMeleeRangeDetection;
+    [SerializeField] private PlayerDetection inMeleeRangeDetection;
+    [SerializeField] private EnemyHitScript enemyHit;
     [SerializeField] private SphereCollider RightHandCol;
     [SerializeField] private SphereCollider LeftHandCol;
+    [SerializeField] private ParticleSystem particleSystem;
     private Coroutine waiting = null;
     private Coroutine attacking = null;
+    private string animationState = "Moving";
+    private Transform target;
+    private Player playerScript;
+    public float countdown = 0;
+    private ParticleSystem.EmissionModule PSEmission;
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
+        PSEmission = particleSystem.emission;
+        PSEmission.rateOverTime = 0;
+        target = player;
     }
     // Start is called before the first frame update
     void Start()
     {
-        
+        playerScript = player.gameObject.GetComponent<Player>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        string animationState = "Moving";
+        if (enemyHit.AteCookie)
+        {
+            cookieState();
+            particleEmission();
+        }
+        else
+        {
+            attackState();
+        }
+        AnimationHandler(animationState);
+    }
+
+    private void particleEmission()
+    {
+        PSEmission.rateOverTime = countdown * 3;
+        countdown = countdown > 0 ? countdown - Time.deltaTime : 0;
+    }
+
+    private void cookieState()
+    {
+        if (playerScript.mostRecentCookie.gameObject != null)
+            target = playerScript.mostRecentCookie.transform;
+        else
+            target = transform;
+        animationState = "Moving";
+        EnemyMovement(playerDetection.cookieInRange);
+        //Debug.Log("moving");
+    }
+
+    private void attackState()
+    {
         if (inMeleeRangeDetection.playerInRange)
         {
             animationState = "Attacking";
@@ -46,35 +84,38 @@ public class EnemyScript : MonoBehaviour
         }
         else
         {
-            if(attacking == null)
+            target = player;
+            if (attacking == null)
             {
-                EnemyMovement();
+                animationState = "Moving";
+                EnemyMovement(playerDetection.playerInRange);
                 //Debug.Log("moving");
-
                 if (RightHandCol.enabled)
                     RightHandCol.enabled = false;
                 if (LeftHandCol.enabled)
                     LeftHandCol.enabled = false;
             }
         }
-        AnimationHandler(animationState);
     }
 
-    private void EnemyMovement()
+    private void EnemyMovement(bool targetInrange)
     {
-        if (playerDetection.playerInRange)
+        if (targetInrange)
         {
             agent.destination = target.position; //Follow Player
             agent.speed = 3.5f;
         }
         else //Random movement
-        {   
-            var rnd = new System.Random();
-            waitFor(rnd.Next(5, 20) / 10, () => {
-                agent.destination = RandomNavmeshLocation(5);
-                agent.speed = rnd.Next(1, 4) % 2 == 0 ? 2 : 3.5f;
-                Debug.Log("Random movement");
-            });
+        {
+            if (!enemyHit.AteCookie)
+            {
+                var rnd = new System.Random();
+                waitFor(rnd.Next(5, 20) / 10, () => {
+                    agent.destination = RandomNavmeshLocation(5);
+                    agent.speed = rnd.Next(1, 4) % 2 == 0 ? 2 : 3.5f;
+                    Debug.Log("Random movement");
+                });
+            }
         }
     }
 

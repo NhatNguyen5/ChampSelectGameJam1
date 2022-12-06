@@ -8,14 +8,19 @@ public class PressurePlatform : MonoBehaviour
     [SerializeField]
     private GameObject sensor;
     private bool player;
-    private bool enemy;
     [SerializeField]
     private GameObject linkedObjective;
     [SerializeField]
     private bool needsABody;
+    private int ghoulsInRange;
+
+    private void Start()
+    {
+        ghoulsInRange = 0;
+    }
     private void Update()
     {
-        if(enemy)
+        if(ghoulsInRange>0)
         {
             sensor.SetActive(true);
             linkedObjective.SetActive(false);
@@ -38,7 +43,7 @@ public class PressurePlatform : MonoBehaviour
         }
         else if(other.tag == "EnemyHitBox")
         {
-            enemy = true;
+            ghoulsInRange++;
         }
     }
 
@@ -50,7 +55,7 @@ public class PressurePlatform : MonoBehaviour
         }
         else if (other.tag == "EnemyHitBox")
         {
-            enemy = false;
+            ghoulsInRange--;
         }
     }
 
